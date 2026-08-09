@@ -1,0 +1,11 @@
+[
+  {
+    "caption": "Harbour: Function Help",
+    "command": "harbour_function_help"
+  },
+  {
+    "caption": "Harbour: Help for Symbol Under Cursor",
+    "command": "harbour_help_for_symbol"
+  }
+]
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>name</key>
+  <string>Harbour Legacy Session Compatibility</string>
+  <key>scopeName</key>
+  <string>source.harbour.legacy-session</string>
+  <key>fileTypes</key>
+  <array/>
+  <key>patterns</key>
+  <array/>
+  <key>uuid</key>
+  <string>8A91D2A5-7FB2-4B7A-A6F0-2D3F7D6394D1</string>
+</dict>
+</plist>
