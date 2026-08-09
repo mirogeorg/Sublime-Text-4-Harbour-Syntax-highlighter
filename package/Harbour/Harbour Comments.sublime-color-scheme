@@ -1,0 +1,51 @@
+{
+    "name": "Harbour Comments",
+    "rules":
+    [
+        {
+            "name": "Asterisk comments",
+            "scope": "comment.line.asterisk.harbour",
+            "foreground": "#6A9955"
+        },
+        {
+            "name": "Asterisk comment marker",
+            "scope": "punctuation.definition.comment.asterisk.harbour",
+            "foreground": "#6A9955"
+        },
+        {
+            "name": "Double ampersand comments",
+            "scope": "comment.line.double-ampersand.harbour",
+            "foreground": "#4EC9B0"
+        },
+        {
+            "name": "Double ampersand comment marker",
+            "scope": "punctuation.definition.comment.double-ampersand.harbour",
+            "foreground": "#4EC9B0"
+        },
+        {
+            "name": "Double slash comments",
+            "scope": "comment.line.double-slash.harbour",
+            "foreground": "#569CD6"
+        },
+        {
+            "name": "Double slash comment marker",
+            "scope": "punctuation.definition.comment.double-slash.harbour",
+            "foreground": "#569CD6"
+        },
+        {
+            "name": "Block comments",
+            "scope": "comment.block.harbour",
+            "foreground": "#C586C0"
+        },
+        {
+            "name": "Block comment begin",
+            "scope": "punctuation.definition.comment.block.begin.harbour",
+            "foreground": "#C586C0"
+        },
+        {
+            "name": "Block comment end",
+            "scope": "punctuation.definition.comment.block.end.harbour",
+            "foreground": "#C586C0"
+        }
+    ]
+}

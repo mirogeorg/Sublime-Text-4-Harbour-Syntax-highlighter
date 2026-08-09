@@ -71,6 +71,27 @@ Remove an older copy from `Packages\Harbour` before using the bundle, so that
 Sublime Text does not load two versions at once. Restart Sublime Text after
 installing or updating the package.
 
+### Different colors for Harbour comment forms
+
+The syntax assigns separate scopes to `*`, `&&`, `//` and `/* ... */`
+comments. The package also includes an optional `Harbour Comments` color
+scheme with different colors for each form. To enable it, choose
+`Preferences > Select Color Scheme > Harbour Comments` after installing the
+package. The default color scheme is not changed automatically.
+
+For a custom color scheme, target these scopes:
+
+```json
+{
+    "rules": [
+        { "scope": "comment.line.asterisk.harbour", "foreground": "#6A9955" },
+        { "scope": "comment.line.double-ampersand.harbour", "foreground": "#4EC9B0" },
+        { "scope": "comment.line.double-slash.harbour", "foreground": "#569CD6" },
+        { "scope": "comment.block.harbour", "foreground": "#C586C0" }
+    ]
+}
+```
+
 ## Build and validate
 
 The repository contains generated package data so it can be inspected and
