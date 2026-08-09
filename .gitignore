@@ -1,0 +1,11 @@
+# Everything in this directory is local-only: migration snapshots, caches,
+# deployment manifests/backups and generated release bundles.
+local-only/
+
+# Python bytecode can be regenerated anywhere in the tree.
+__pycache__/
+*.py[cod]
+
+# Common OS metadata.
+.DS_Store
+Thumbs.db
