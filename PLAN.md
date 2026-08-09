@@ -12,7 +12,7 @@
 ## Структура и публични интерфейси
 
 ```text
-harbour_ST4_syntax_highlighter/
+harbour_Sublime_Text_4_Harbour_Syntax_highlighter/
 ├── PLAN.md, README.md, LICENSE, THIRD_PARTY_NOTICES.md
 ├── package/Harbour/          # единствената инсталируема ST4 папка
 │   ├── Harbour.sublime-syntax
@@ -58,6 +58,6 @@ harbour_ST4_syntax_highlighter/
 - Добавят се `ORIGIN.md`, дърво на файловете и `SHA256SUMS.txt`; архивът не участва в генерирането.
 - Инсталира се и се пакетира само `package/Harbour`.
 - Новият проект е `GPL-3.0-or-later`, със запазени MIT notice за asistex, GPL произход от rafathefull/harbour и отделна provenance за Harbour source/contrib.
-- Локалните snapshot-и, caches, deployment rollback-и и генерирани `.sublime-package` файлове са събрани в `local-only/` и се изключват с `.gitignore`.
+- Локалните snapshot-и, caches, временни работни файлове и генерирани `.sublime-package` файлове са събрани в `local-only/` и се изключват с `.gitignore`.
 - Преди публикуване се изпълняват secret/path scan, license/notice validation и clean-checkout regeneration.
 - Извън първата версия остават Harbour build integration и отделен syntax за `.hbp/.hbc/.hbm`.

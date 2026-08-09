@@ -39,21 +39,37 @@ help. The exact current counts are always available in
 
 ## Install in Sublime Text 4
 
-1. Close Sublime Text 4, or reload the package after copying it.
-2. Copy the `package/Harbour` directory into Sublime Text's `Packages`
-   directory.
-3. Open a Harbour source file and use the Command Palette to run one of the
-   Harbour help commands.
+The package is installed by copying the published `package/Harbour` directory;
+no deployment script or project-specific path is required.
 
-On Windows the destination is usually:
+### Unpacked package
+
+1. In Sublime Text 4, choose `Preferences > Browse Packages…`.
+2. Copy the complete `package/Harbour` directory from this repository into the
+   Packages directory opened by Sublime Text.
+3. Restart Sublime Text, or close and reopen the Harbour source file.
+4. Open a `.prg`, `.hb`, `.ch`, `.ppo`, `.res` or `.idu` file and confirm that
+   the syntax shown in the status bar is `Harbour`.
+5. Open the Command Palette and try `Harbour: Function Help` or
+   `Harbour: Help for Symbol Under Cursor`.
+
+On Windows, the unpacked destination is usually:
 
 ```text
 %APPDATA%\Sublime Text\Packages\Harbour
 ```
 
-The package can also be installed from the generated
-`local-only/dist/Harbour.sublime-package` release bundle when a local build has
-been produced.
+### Packaged installation
+
+If a `Harbour.sublime-package` bundle has been built locally, copy it into:
+
+```text
+%APPDATA%\Sublime Text\Installed Packages\Harbour.sublime-package
+```
+
+Remove an older copy from `Packages\Harbour` before using the bundle, so that
+Sublime Text does not load two versions at once. Restart Sublime Text after
+installing or updating the package.
 
 ## Build and validate
 
@@ -87,37 +103,21 @@ files, creates the deterministic package bundle and validates the result.
 Symbols reported by `hbmk2` without source evidence remain available for
 syntax coloring but are intentionally excluded from autocomplete and help.
 
-## Local deployment
-
-To install the generated folder into a local Sublime Text installation:
-
-```powershell
-.\scripts\deploy-local.ps1
-```
-
-The deployment script stages and hashes the package, preserves the previous
-installation, verifies the deployed tree and restores the backup if anything
-fails. Restore the previous package with:
-
-```powershell
-.\scripts\rollback-local.ps1
-```
-
 ## Repository layout
 
 ```text
 package/Harbour/       Installable Sublime Text package
 catalog/               Raw inventory, canonical records and quality reports
 tools/                 Catalog, generation, packaging and validation tools
-scripts/               Local install and rollback scripts
+scripts/build.ps1      Optional local build-and-validate wrapper
 tests/                 Automated and manual syntax fixtures
 PLAN.md                Design and acceptance criteria
 ```
 
 `local-only/` is intentionally absent from the published repository. It is the
-single ignored home for migration snapshots, source caches, deployment
-manifests/rollback trees and generated `.sublime-package` bundles. Nothing in
-that directory is required to use the already-generated package.
+single ignored home for migration snapshots, source caches, temporary work and
+generated `.sublime-package` bundles. Nothing in that directory is required to
+use the already-generated package.
 
 ## Scope
 
