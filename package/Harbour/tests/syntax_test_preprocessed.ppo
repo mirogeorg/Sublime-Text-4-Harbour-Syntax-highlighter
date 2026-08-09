@@ -1,0 +1,4 @@
+// SYNTAX TEST "Packages/Harbour/Harbour.sublime-syntax"
+FUNCTION Preprocessed()
+RETURN Date()
+

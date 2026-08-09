@@ -1,0 +1,4 @@
+FUNCTION PreprocessedExample()
+   LOCAL nValue := 42
+RETURN nValue
+

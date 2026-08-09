@@ -1,0 +1,30 @@
+<snippet>
+	<description>Minimalno mnu</description>
+    <content><![CDATA[
+//------------ mnuMinimal BEGIN ---------------------------------------------------------
+Color(, GROUP_RED )
+mnu := mnuInit()
+mnuModify( mnu, { ;
+				 { "WinStatus",          {{ "ESC/ENTER", "Изход" }} },;
+				 { "WinTitle",           "Фатални грешки" },;
+				 { "chExtendedSearch",   .t. },;
+				 { "chSearch",           .F. },;
+				 { "chHorizStep",        5 },;
+				 { "mnWidth",            120 },;
+				 { "mnCenteredItems",    .f. };
+				} )
+				 // { "chUnknownExit",      .t. },;
+
+
+mnuModify( mnu, { { "chItems",      aErr },;
+				  { "chSelectable", aFill( Array( Len( aErr )), .t.) },;
+				  { "mnCargo",      aFill( Array( Len( aErr )), "" ) },;
+				  { "mnHeight",     Min( Len( aErr ) + 2, MaxRow() + 1 ) };
+				} ) 
+mnuLaunch( mnu )
+mnuFinish( mnu )
+//------------ mnuMinimal END ---------------------------------------------------------
+]]></content>
+    <tabTrigger>helpMnuMinimal</tabTrigger>
+    <scope>source.harbour</scope>
+</snippet>

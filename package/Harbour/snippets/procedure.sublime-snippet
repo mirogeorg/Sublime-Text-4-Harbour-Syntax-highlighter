@@ -1,0 +1,9 @@
+<snippet>
+  <content><![CDATA[PROCEDURE ${1:Name}( ${2:arguments} )
+	${0}
+RETURN]]></content>
+  <tabTrigger>procedure</tabTrigger>
+  <scope>source.harbour</scope>
+  <description>Harbour procedure</description>
+</snippet>
+

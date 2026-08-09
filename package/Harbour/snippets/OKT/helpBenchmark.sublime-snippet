@@ -1,0 +1,21 @@
+<snippet>
+	<description>Скорост на изпълнение</description>
+	<content><![CDATA[
+// START HELPBENCHMARK ================================================================================
+nTime := hb_milliseconds()
+for i := 1 to 1000000
+	//test1
+next
+? "1st elapsed: ", hb_milliseconds() - nTime
+
+nTime := hb_milliseconds()
+for i := 1 to 1000000
+	//test2
+next
+
+? "2nd elapsed: ", hb_milliseconds() - nTime
+wait
+//END HELPBENCHMARK ===================================================================================]]></content>
+	<tabTrigger>helpBenchmark</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

@@ -1,0 +1,9 @@
+<snippet>
+  <content><![CDATA[TEXT INTO ${1:cText}
+${0}
+ENDTEXT]]></content>
+  <tabTrigger>textinto</tabTrigger>
+  <scope>source.harbour</scope>
+  <description>Harbour TEXT INTO block</description>
+</snippet>
+

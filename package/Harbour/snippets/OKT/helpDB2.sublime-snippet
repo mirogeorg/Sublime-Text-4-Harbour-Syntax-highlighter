@@ -1,0 +1,12 @@
+<snippet>
+	<description>DialogBox -> msgBox натиснете ENTER</description>
+	<content><![CDATA[MSGBox( { "Текст" ,;
+		{ "msHDefaultESC",    0 },;
+		{ "msHItems",         { "Ok" } } ,;
+		{ "msAutoCloseAfter", 0 },;
+		{ "winYOffset",       0 },;
+		{ "winXOffset",       0 },;
+		{ "msAllowESC",       .t. } } )]]></content>
+	<tabTrigger>helpDB2</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

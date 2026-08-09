@@ -1,0 +1,13 @@
+<snippet>
+  <content><![CDATA[SWITCH ${1:expression}
+CASE ${2:value}
+	${0}
+	EXIT
+OTHERWISE
+
+ENDSWITCH]]></content>
+  <tabTrigger>switch</tabTrigger>
+  <scope>source.harbour</scope>
+  <description>Harbour SWITCH block</description>
+</snippet>
+

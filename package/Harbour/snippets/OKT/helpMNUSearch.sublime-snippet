@@ -1,0 +1,57 @@
+<snippet>
+	<description>MNU с търсене</description>
+	<content><![CDATA[// START HELPMNU =============================================
+hUniqueNOMER := { => }
+aNOMERItems  := {}
+nInit        := 1
+
+aFiles := ID2DoTask( "FILE_ZDOGPLA", "GETDBF" )
+for each cFile in aFiles
+	nREKOLTA := Val( CharOnly( "0123456789", hb_FNameNameExt( cFile ) ) )
+	net use (cFile) via "DBFCDX" shared new alias ZDOGPLA
+	set order to tag ORD_ZDOGPLA_NOMER_VIDPLA_UNIQUE
+	dbGoTop()
+	while !EOF()
+		if VIDPLA == ZDOGPLA_VIDPLA_PLATEJNO .and. !hb_hHasKey( hUniqueNOMER, NOMER )
+			hUniqueNOMER[ NOMER ] := nil
+			
+			c := hb_hGetDef( hFir, NOMER, PadR( "Неизвестна фирма", 30 ) )
+			aAdd( aNOMERItems, { c, NOMER, " " + CharRepl( '"-,./?;[]\|!()' + "'", Upper( c ), Space( 15 ) ) + " " } )
+		endif
+		skip
+	enddo
+	close ZDOGPLA
+next
+
+if Empty( aNOMERItems )
+	Color(, GROUP_GREEN )
+	MSGBox( { "Списъка с фирми е празен" ,;
+			{ "msHDefaultESC",    0 },;
+			{ "msHItems",         { "Ok" } } ,;
+			{ "msAutoCloseAfter", 0 },;
+			{ "msAllowESC",       .t. } } )
+else
+	aNOMERItems := aSort( aNOMERItems,,, { |x, y| x[ 1 ] < y[ 1 ] } )
+	nInit       := Max( 1, aScan( aNOMERItems, { |x| x[ 2 ] == cNOMER } ) )
+	Color(, GROUP_GREEN )
+	SaveColor00()
+	Color00( 1, 14 )
+	
+	h := mnuSearch( { "ITEMS"        => A2ToSing( aNOMERItems, 1 ),;
+					  "CARGO"        => A2ToSing( aNOMERItems, 2 ),;
+					  "SEARCH_ITEMS" => A2ToSing( aNOMERItems, 3 ),;
+					  "TITLE"        => "Изберете фирма",;
+					  "INITITEM"     => nInit,;
+					  "SEARCH_HELP"  => .f.,;
+					  "TOPSTATIC"    => { "Фирма                                      ",;
+					  			          "───────────────────────────────────────────" } } )
+					 
+	RestColor00()
+	if !Empty( h )
+		cNOMER := h[ "CARGO" ] 
+		mnuInsKey( KX_MID_DOWN )
+	endif
+//END HELPMNU ===================================================================================]]></content>
+	<tabTrigger>helpMNUSearch</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

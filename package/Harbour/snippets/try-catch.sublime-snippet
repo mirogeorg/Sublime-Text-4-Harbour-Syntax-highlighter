@@ -1,0 +1,13 @@
+<snippet>
+  <content><![CDATA[TRY
+	${1}
+CATCH ${2:oError}
+	${0}
+FINALLY
+
+END]]></content>
+  <tabTrigger>try</tabTrigger>
+  <scope>source.harbour</scope>
+  <description>Harbour TRY/CATCH block</description>
+</snippet>
+

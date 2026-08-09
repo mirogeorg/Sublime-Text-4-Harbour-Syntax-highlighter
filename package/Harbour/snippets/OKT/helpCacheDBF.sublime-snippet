@@ -1,0 +1,14 @@
+<snippet>
+	<description>CacheDBF()</description>
+	<content><![CDATA[cCacheID := CacheDBFNew()
+		cTemp := CacheDBFGenTemp( cCacheID )[ "FILE" ]
+		
+		cFILE_ZDOGPLAX := ZDOGPLAX2File( hb_DateTime( nRekolta, 1, 1 ) )
+		cTemp := CacheDBF( cCacheID, "FILE_ZDOGPLAX", cFILE_ZDOGPLAX, .t. )[ "FILE" ]
+		net use (cTemp) via "DBFCDX" exclusive new alias LALA
+		
+		CacheDBFClose( cCacheID )
+		]]></content>
+	<tabTrigger>helpCacheDBF</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

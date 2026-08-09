@@ -1,0 +1,55 @@
+<snippet>
+	<description>cUSLOB сглобяване на сложно условие за теглене от файл</description>
+    <content><![CDATA[
+//------------ USLOB BEGIN ---------------------------------------------------------
+cUSL := "NOMER = '" + QEncodeS( NOMERF ) + "'"
+cUSL_DATA := " DATP >= STOD( '" + DTOS( dNDA ) + "') .and. DATP <= STOD( '" + DTOS( dKDA ) + "')"
+cUSL_KOOP := "KL = '" + QEncodeS(cKL_IME) + "'"
+cUSL_KOOP := "KL = " + hb_ValToExp(cKL_IME)
+
+cUSLOB := ""
+cUSLOB += if( empty( cUSL      ), "", if( Empty( cUSLOB ), "", " .and. " ) + cUSL)
+cUSLOB += if( empty( cUSL_DATA ), "", if( Empty( cUSLOB ), "", " .and. " ) + cUSL_DATA )
+cUSLOB += if( empty( cUSL_KOOP ), "", if( Empty( cUSLOB ), "", " .and. " ) + cUSL_KOOP )
+
+?cUSLOB;wait
+bFor := nil
+if !Empty( cUSLOB )		  
+	bFor   := &("{||" + cUSLOB + "}")	// когато образуваме кодовия блок от стринг, вътре в стринга всичко трябва даа е с QEncodeS	
+endif
+bWhile := { || OTG == cOTG_KOD }    // онеже е директен блок, нямаме кавички, използваме директно променливи (cOTG_KOD) - не е нужно да са локал!
+
+select FAK
+set order to ORD_FAK_OTG_KL_NOMER
+
+cRKLII := "mem:SHLQGjF47Vp4wggXn82O533VQGiymgwV.dbf"
+dbseek(cORG_KOD)
+
+////////// FILTER PO KODOV BLOK \\\\\\\\\\\\\\\\\
+
+dbSetFilter( bFor )	
+
+////////// KOPIRANE KAM ZATVOREN FAIL \\\\\\\\\\\\
+
+//za fixirani usloviq, koito sa izvestnipredvaritelno:
+copy to (cSearchFile) for Eval( { |x| x \$ field -> SEARCH }, cSearch )
+
+////////// KOPIRANE KAM OTVOREN FAIL \\\\\\\\\\\\\
+
+aSTRU := Stru2DBCREATE( ID2STRU( "FILE_TR" ) )
+aSTRU := aJoinUniqueDBSTRU( aSTRU, ADDED_FIELDS ) //Добавяме поле преди създаването на файла
+dbCreate( cRKLII, aSTRU )
+NET USE (cRKLII) exclusive NEW alias RWWW
+nRKLIIArea := select()
+
+bFor   := &("{||NOMER == '" + QEncodeS( NOMERF ) + "' .AND. ( !empty(wkmstbr) .or. !empty(wkmstsr) )}" )
+bWhile := &("{||DAT <= STOD( '" + DTOS( dKDA ) + "')}" )
+
+__dbTrans( nRKLIIArea, ,bFor, bWhile )
+
+TRANSFER to nRFAKTNArea NEXT 1
+//------------ USLOB END ---------------------------------------------------------
+]]></content>
+    <tabTrigger>helpDB_USLOB</tabTrigger>
+    <scope>source.harbour</scope>
+</snippet>

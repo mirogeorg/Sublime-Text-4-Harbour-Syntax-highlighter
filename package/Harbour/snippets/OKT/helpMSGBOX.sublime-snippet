@@ -1,0 +1,53 @@
+<snippet>
+	<description>msgBox Пълен списък с опции</description>
+	<content><![CDATA[
+// ------------------ MsgBox BEGIN --------------------------------------------------------
+		
+Color( , GROUP_RED)
+_last := MSGBox( { "Текст 1 " + chr( 255 ) + " @     " ,;
+				   "-" ,;
+				   "Текст 2  " +             " @     " ,;
+				 { "WinTitle",        "З център" } ,;
+				 { "WinTitleL",       "З ляво" } ,;
+				 { "WinTitleR",       "З дясно" } ,;
+				 { "msCenteredItems", .t. } ,;  //dali texta da e centriran
+				 { "msClose",         .f. } ,;          //pri izhod ot msgbox prozoreca ne se zatvarq
+				 { "WinX1",           3 } ,;
+				 { "WinY1",           2 } ,;
+				 { "WinStatus",       "Статус" },;
+				 { "WinStatusL",      "Статус L" },;
+				 { "WinStatusR",      "Статус R" } } )
+				 
+@ @@1 get ....
+				 
+n := MSGBox( { chr( 255 ) + "Текст 1" + chr( 255 ) ,;
+			   "-" ,;
+			   " Текст 2 " ,;
+			 { "WinTitle",         "З център" } ,;
+			 { "WinTitleL",        "З ляво" } ,;
+			 { "WinTitleR",        "З дясно" } ,;
+			 { "msCenteredItems",  .t. },;
+			 { "msVItemsUMargin",  1 },;     //Kolko reda otstoqnie da ima mejdu texta i menuto
+			 { "msVDefaultESC",    0 },;
+			 { "msHInit",          1 },;
+			 { "msVInit",          1 },;
+			 { "msVItems",         { "Опция1", "Опция2" } } ,;
+			 { "msAllowESC",       .t. } ,;
+			 { "msVItemsPADC",     .f. } ,;     //dali texta da e centriran (samo ako imame VItems)
+			 { "msClose",          .t. } ,;          //pri izhod ot msgbox prozoreca se zatvarq
+			 { "msAutoCloseAfter", 2 }, //sled kolko sekundi prozoreca ste se zamozatvori
+			 { "WinX1",            3 } ,;
+			 { "WinY1",            2 } ,;
+			 { "WinStatus",        "Статус" },;
+			 { "WinStatusL",       "Статус L" },;
+			 { "WinStatusR",       "Статус R" },;
+			 { "winYOffset",       -10 },     //dopalnitelno otmestvane po X sprqmo zadadenoto sas X1, Y1 i t.n.
+			 { "winXOffset",       +10 } } )
+			 
+if n = 1
+endif
+// ------------------ MsgBox END --------------------------------------------------------
+]]></content>
+	<tabTrigger>helpMSGBOX</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

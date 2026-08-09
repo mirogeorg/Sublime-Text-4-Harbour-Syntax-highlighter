@@ -1,0 +1,11 @@
+<snippet>
+  <content><![CDATA[BEGIN SEQUENCE
+	${1}
+RECOVER USING ${2:oError}
+	${0}
+END SEQUENCE]]></content>
+  <tabTrigger>beginseq</tabTrigger>
+  <scope>source.harbour</scope>
+  <description>Harbour BEGIN SEQUENCE block</description>
+</snippet>
+

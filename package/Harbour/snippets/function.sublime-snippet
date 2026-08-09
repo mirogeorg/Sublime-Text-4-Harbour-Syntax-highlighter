@@ -1,0 +1,9 @@
+<snippet>
+  <content><![CDATA[FUNCTION ${1:Name}( ${2:arguments} )
+	${0}
+RETURN NIL]]></content>
+  <tabTrigger>function</tabTrigger>
+  <scope>source.harbour</scope>
+  <description>Harbour function</description>
+</snippet>
+

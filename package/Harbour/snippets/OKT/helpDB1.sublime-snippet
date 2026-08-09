@@ -1,0 +1,10 @@
+<snippet>
+	<description>DialogBox -> msgBox с избор</description>
+	<content><![CDATA[MSGBox( { "Текст" ,;
+		{ "msHDefaultESC", 0 },;
+		{ "msHInit",       2 },;
+		{ "msHItems",      { "ОпцияI", "ОпцияII" } } ,;
+		{ "msAllowESC",    .t. } } )]]></content>
+	<tabTrigger>helpDB1</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

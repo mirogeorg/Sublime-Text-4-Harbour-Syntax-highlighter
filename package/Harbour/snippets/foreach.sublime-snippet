@@ -1,0 +1,9 @@
+<snippet>
+  <content><![CDATA[FOR EACH ${1:item} IN ${2:collection}
+	${0}
+NEXT]]></content>
+  <tabTrigger>foreach</tabTrigger>
+  <scope>source.harbour</scope>
+  <description>Harbour FOR EACH loop</description>
+</snippet>
+

@@ -1,0 +1,55 @@
+<snippet>
+	<description>Създаване структира на работни файлове</description>
+    <content><![CDATA[
+//------------ Stru2dbCreate BEGIN ---------------------------------------------------------
+aSTRU := Stru2DBCREATE( ID2STRU( "FILE_FAK" ) )
+
+--------------
+aSTRU := aJoin( aSTRU, { { "SROK_PLA", "D", 8, 0 } } ) //Добавяме поле преди създаването на файла
+
+						// "1234567890" <-- максимална дължина на полето 10 знака
+aSTRU := aJoin( aSTRU, { { "SROK_PLA", "D", 8, 0 },;
+						 { "LEVEL",    "N", 8, 0 };
+					   } )                             //Добавяме полета преди създаването на файла
+
+--------------					   
+fldEdit( aSTRU, "IME",  "SK_IME" )                     // в aSTRU структурата полето "IME" става "SK_IME"
+fldDel(  aSTRU, "NATOW" )                              // трие полето "NATOW" от структурата aSTRU
+?fldLen( aStru, "NATOW " )                             // връща дължината на полето
+
+--------------
+		   // "1234567890" <-- максимална дължина на полето 10 знака			
+aAdded := { { "DISTANCE", "N",  5, 0 },;
+			{ "KOL",      "N", 15, 3 } }
+aSTRU := aJoin( aSTRU, aAdded )    	 
+
+---------------
+aFAKStru := Stru2DBCREATE( ID2STRU( "FILE_FAK" ) )
+aSTRU := { FldGet( aFAKStru, "KL", "RABKL" ),;         //взимаме полето KL от aFAKStru преименувайки го на RABKL в работни файл 
+       	   FldGet( aFAKStru, "DATP"        ),;
+           { "FIR_IME"     , "C",  30, 0 },;   
+           { "level"       , "N",   1, 0 };   
+    	 }
+
+dbAddFields( "NOMAS_.DBF", aAdded )    	              //добавя полета във вече създаден файл
+
+aStru := Stru2DBCREATE( ID2STRU( "FILE_ZNOMOTG" ) )
+aAdd( aStru, { "ZEMLISTE", "C", LenF2( "FILE_EKT", "IME" ), LenF2Dec( "FILE_EKT", "IME" ) } )
+aAdd( aStru, { "OBSTINA",  "C", LenF2( "FILE_EKT", "OBSTINA" ), LenF2Dec( "FILE_EKT", "OBSTINA" ) } )
+
+cRKLI := "mem:JZ4OjiDS8Nonjbq2asXrtDOFIdyQJva0.dbf"    	
+dbCreate( cRKLI, aSTRU )
+net use (cRKLI) via "DBFCDX" new exclusive alias RKLI
+index on IME       TAG L1
+select RKLI
+set order to TAG L1
+
+
+close RKLI
+dbDrop( cRKLI )
+
+//------------ Stru2dbCreate END ---------------------------------------------------------
+]]></content>
+    <tabTrigger>helpStru2DBCreate</tabTrigger>
+    <scope>source.harbour</scope>
+</snippet>

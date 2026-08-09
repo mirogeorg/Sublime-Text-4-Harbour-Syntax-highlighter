@@ -1,0 +1,298 @@
+<snippet>
+	<description>MNU със Cells</description>
+	<content><![CDATA[// START HELPMNUCELLS =============================================
+//--------------------------------------------------------------------------------------------------------------------------
+
+procedure CellDispTest( aLine, nLine, nRow, nCol, lHiLyt )//, nLine, lHiLyt, nRow, nCol )
+#define CD_ITEM   1
+#define CD_SELEC  2
+#define CD_MARK   3
+local c := "", aCell, i, cCargo
+local nCellLeftBorder  := 0  //lqva granica na izbranata kletka, koqto trqbwa da se wijda w ekrancheto
+local nCellRightBorder := 0 //Dqsna granica na izbranata kletka, koqto trqbwa da se wijda w ekrancheto
+static nT1FreezeLeft   := 5 
+static nT2FreezeLeft   := 10
+static nT1XOffset      := 0 
+static nT2XOffset      := 1
+
+	//aLine - { { "disppart", eq }, { "disppart", eq } ... } 
+	//lHiLyt .and. chHardHilight - dali e osveten reda, koito chertaem
+
+	//v tazi firma ot masiv pravim red za na ekrana
+	// #xtranslate MakeEKR( <cDisp> )             => if( m->chFreezeLeft  > 0, PadR00( <cDisp>, m->chFreezeLeft  - 1 ) + SubStr00( <cDisp>, m->chFreezeLeft  + m->nXOffset   ), SubStr00( <cDisp>, m->nXOffset   ))
+	#xtranslate MakeEKRT1( <cDisp> )           => if( nT1FreezeLeft > 0, PadR00( <cDisp>, nT1FreezeLeft - 1 ) + SubStr00( <cDisp>, nT1FreezeLeft + nT1XOffset ), SubStr00( <cDisp>, nT1XOffset ))
+	#xtranslate MakeEKRT2( <cDisp> )           => if( nT2FreezeLeft > 0, PadR00( <cDisp>, nT2FreezeLeft - 1 ) + SubStr00( <cDisp>, nT2FreezeLeft + nT2XOffset ), SubStr00( <cDisp>, nT2XOffset ))
+	#define     isSelectable( xSelect, nIndex )  (if( hb_isArray( xSelect ), if( nIndex <= Len( xSelect ), xSelect[ nIndex ], .f. ), xSelect ) )
+	SetColor( if( isSelectable( chSelectable, nLine ), cLoClr, cUnClr ) )
+	
+	// chTopStatic   := { "1", "2" }
+	// nLenTopStatic := Len( chTopStatic )
+	// chY1          := nOriginalY1 + nLenTopStatic
+	// nHeight       := chY2 - chY1 + 1    // Number of rows in the window
+	
+	
+	for i := 1 to Len( aLine )	
+		cCargo := Left( chCargo[ nLine ], 3 )
+		if cCargo == "#T1"
+			if aLine[ i, CD_SELEC ] == npT1Column .and. lHiLyt .and. chHardHilight //ako izvejdanata kolonka e koqto e izbrana, i reda e kadeto e markera, ocvetqwame
+				
+				nCellLeftBorder  := Len00( c )
+				c                += "°:" + Remove00( aLine[ i, CD_ITEM ] ) + "°:"
+				nCellRightBorder := Len00( c )
+				
+				if nT1FreezeLeft + nT1XOffset-1 > Max( nCellLeftBorder, nT1FreezeLeft )  //opredelqme dali leviq bord na kletkata se wijda na ekrana. ako ne - myrdame izgleda
+					nT1XOffset := Max( 0, nCellLeftBorder - nT1FreezeLeft + 1 )
+					a3Redraw()
+				endif
+				
+				if nT1XOffset + nWidth < nCellRightBorder //opredelqme dali desniq bord na kletkata se wijda na ekrana. ako ne - myrdame izgleda
+					nT1XOffset := nT1XOffset + nCellRightBorder - (nT1XOffset + nWidth) 
+					a3Redraw()
+				endif
+				
+				a3GetSetTableXOffset( nT1XOffset ) //chrez tova zadawame XOffset-a w BottomStatic da se dviji samo kogato sme w tablicata
+				
+				lInsideTable := .t. //reda sas selekciq se namira w tablica. pri izhod ot tablicata mardame izgkeda nXOffset na 1
+				DevPos( nRow, nCol - chHMargins )
+				Write00( m->cHMargin + PadR00( MakeEKRT1( c ), nWidth ) + m->cHMargin )
+			else
+				if aLine[ i, CD_MARK ] == .f.
+					c += aLine[ i, CD_ITEM ]
+				else //markirovka
+					c += "°;" + aLine[ i, CD_ITEM ] + "°;"
+				endif
+			endif
+			DevPos( nRow, nCol - chHMargins )
+			Write00( m->cHMargin + PadR00( MakeEKRT1( c ), nWidth ) + m->cHMargin )
+			
+		elseif cCargo == "#T2" //obrabitka na 2ra tablica
+			if aLine[ i, CD_SELEC ] == npT2Column .and. lHiLyt .and. chHardHilight
+				nCellLeftBorder  := Len00( c )
+				c                += "°:" + Remove00( aLine[ i, CD_ITEM ] ) + "°:"
+				nCellRightBorder := Len00( c )
+				
+				if nT2FreezeLeft + nT2XOffset-1 > Max( nCellLeftBorder, nT2FreezeLeft )
+					nT2XOffset := Max( 0, nCellLeftBorder - nT2FreezeLeft + 1 )
+					a3Redraw()
+				endif
+				
+				if nT2XOffset + nWidth < nCellRightBorder
+					nT2XOffset := nT2XOffset + nCellRightBorder - (nT2XOffset + nWidth) //+ 1 
+					a3Redraw()
+				endif
+				lInsideTable := .t.
+				DevPos( nRow, nCol - chHMargins )
+				Write00( m->cHMargin + PadR00( MakeEKRT2( c ), nWidth ) + m->cHMargin )
+			else
+				c += aLine[ i, CD_ITEM ]
+			endif
+			DevPos( nRow, nCol - chHMargins )
+			Write00( m->cHMargin + PadR00( MakeEKRT2( c ), nWidth ) + m->cHMargin )
+		else
+			SimulateError( "Unimplemented" ) //tablica nomer 3 e unimplemented
+		endif
+	next
+	
+	// nXOffset := 10
+	// a3Redraw()*
+	// hb_DispOutAt( 25, nCol - chHMargins, cHMargin + "!")
+return 
+
+// START HELPMNU =============================================
+function testmenu()
+local aItems, aSelec, aCargo
+local cCargo
+local cMNUGoto    := ""
+local nMNUGoto
+local GetList     := {}	
+local h, s, a, c
+local lF10Pressed := .f.
+local lRefresh
+local lValidated
+local mnu
+local nAligned
+local nKeyExt
+local nKey
+local lT1TopStatic := .f.
+local nLastMaxCol
+local nLastMaxRow
+local nWidth, nHeight
+local _last, hRec
+local lExit := .f.
+private npT1Column := 1, npT2Column := 1
+
+	aBottomStatic := { " Имот         |-Заглавие1--!-Заглавие2--!-Заглавие3--!-Заглавие4--!-Заглавие5--!-Заглавие6--!-Заглавие7--!-Заглавие8--!-Заглавие9--",;
+		  			   "--------------!------------!------------!------------!------------!------------!------------!------------!------------!------------" }
+
+	color( COLOR_NORMAL, GROUP_BLUE )
+	mnu := mnuInit()
+	mnuModify( mnu, { ;
+						{ "WinStatus",          {{ "F10", "Към обработка" }, { "ESC", "Изход" }} },;
+						{ "WinTitle",           "Движение на МПС - Варна" },;
+						{ "chCellPainter",      { |aLine, nLine, nRow, nCol, lHiLyt| CellDispTest( aLine, nLine, nRow, nCol, lHiLyt ) } },;
+						{ "chExtendedExitKeys", { KX_F10, KX_NUM_LEFT, KX_MID_LEFT, KX_NUM_RIGHT, KX_MID_RIGHT } },;
+						{ "chExtendedSearch",   .F. },;
+						{ "chBottomStatic",      aBottomStatic },;
+						{ "chSolidSelect",      .t. },;
+						{ "chSearch",           .F. },;
+						{ "chFreezeLeft",       5 },;
+						{ "chUnknownExit",      .t. },;
+						{ "chHorizStep",        1 },;
+						{ "mnBorder",           0 },;
+						{ "chRedefineLEFT",   { |x| x == KX_CTRL_MID_LEFT  .or. x == KX_CTRL_NUM_LEFT } },;
+						{ "chRedefineRIGHT",  { |x| x == KX_CTRL_MID_RIGHT .or. x == KX_CTRL_NUM_RIGHT } },;
+						{ "mnCenteredItems",    .f. } } )
+						// { "chSolidSelect",    { |x| x != KX_TAB } },;
+						// { "chCustomSelector",   { |x, nLine| CustomSelector( x, nLine ) } },;
+						// { "WinY1",           1 },;
+	
+						// { "WinX1",           3 },;
+						// { "WinXOffset",      -20 },;
+						// { "WinYOffset",      -5 },;
+						// { "mnBorder",        0 },; //bez border, platno do raba na ekrana
+
+	nLastMaxRow := MaxRow()
+	nLastMaxCol := MaxCol()
+	repeat
+		nWidth  := Min( MaxCol() + 1, 95 )
+		nHeight := Min( MaxRow() + 1, 6 )
+		aItems := {}
+		aSelec := {}
+		aCargo := {}
+		M->aCargo := {}
+		
+		Color00( 1, 12 )
+
+		Color00( 6, 12 )
+		Color00( 7, 14 )
+		Color00( 8, 12 )
+		Color00( 9, 4, 12 ) //лента за избор със стрелки
+		Color00( 10, 0, 14 ) //tekushta kletka w tablicata
+		Color00( 11,  , 4 )  //markirovka na kletkite
+
+		lValidated := .t.
+
+		aAdd( aItems, "Период:: °7234123412323°7")
+		aAdd( aCargo, "PERIOD" )
+		aAdd( aSelec, .T. )
+		
+		aAdd( aItems, "Вид на справката:: efwefef" )
+		aAdd( aCargo,  "<>VID" )
+		aAdd( aSelec, .T. )
+		
+		aT1Cols := { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+		
+		aAdd( aItems, { { " Имот 5447332 ", 1, .f. }, { "|", 0, .f. },  { " 1234567890 ", 2, .f. }, { "|", 0, .f. }, { " 1234567890 ", 3, .f. }, { "|", 0, .f. }, { " 1234567890 ", 4, .f. }, { "|", 0, .f. },  { " aaaaaaaaaa ", 5, .f. }, { "|", 0, .f. }, { " bbbbbbbbbb ", 6, .f. }, { "|", 0, .f. }, { " cccccccccc ", 7, .f. }, { "|", 0, .f. },  { " dddddddddd ", 8, .f. }, { "|", 0, .f. }, { " eeeeeeeeee ", 9, .f. }, { "|", 0, .f. }, { " ffffffffff ", 10, .f. } } )
+		aAdd( aCargo,  "#T1" )
+		aAdd( aSelec, .t. )
+		
+		aAdd( aItems, { { " Имот 0000000 ", 1, .f. }, { "|", 0, .f. },  { " 6666666666 ", 2, .t. }, { "|", 0, .t. }, { " 6666666666 ", 3, .t. }, { "|", 0, .f. }, { " 1111111111 ", 4, .f. }, { "|", 0, .f. },  { " aaaafffaaa ", 5, .f. }, { "|", 0, .f. }, { " bbbb444bbb ", 6, .f. }, { "|", 0, .f. }, { " ccccc666cc ", 7, .f. }, { "|", 0, .f. },  { " dddd777ddd ", 8, .f. }, { "|", 0, .f. }, { " eeeeeeeeee ", 9, .f. }, { "|", 0, .f. }, { " ffffffffff ", 10, .f. } } )
+		aAdd( aCargo,  "#T1" )
+		aAdd( aSelec, .t. )
+		
+		aAdd( aItems, "Период:: °7234123412323°7")
+		aAdd( aCargo, "PERIOD" )
+		aAdd( aSelec, .T. )
+		
+		aAdd( aItems, "Вид на справката:: efwefef" )
+		aAdd( aCargo,  "<>VID" )
+		aAdd( aSelec, .T. )
+		
+		aAdd( aItems, { { " Имот 5447332 ", 1 }, { "|", 0 },  { " 1234567890 ", 2 }, { "|", 0 }, { " 1234567890 ", 3 }, { "|", 0 }, { " 1234567890 ", 4 }, { "|", 0 },  { " aaaaaaaaaa ", 5 }, { "|", 0 }, { " bbbbbbbbbb ", 6 }, { "|", 0 }, { " cccccccccc ", 7 }, { "|", 0 },  { " dddddddddd ", 8 }, { "|", 0 }, { " eeeeeeeeee ", 9 }, { "|", 0 }, { " ffffffffff ", 10 } } )
+		aAdd( aCargo,  "#T2" )
+		aAdd( aSelec, .t. )
+		
+		aAdd( aItems, { { " Имот 0000000 ", 1 }, { "|", 0 },  { " 6666666666 ", 2 }, { "|", 0 }, { " 6666666666 ", 3 }, { "|", 0 }, { " 1111111111 ", 4 }, { "|", 0 },  { " aaaafffaaa ", 5 }, { "|", 0 }, { " bbbb444bbb ", 6 }, { "|", 0 }, { " ccccc666cc ", 7 }, { "|", 0 },  { " dddd777ddd ", 8 }, { "|", 0 }, { " eeeeeeeeee ", 9 }, { "|", 0 }, { " ffffffffff ", 10 } } )
+		aAdd( aCargo,  "#T2" )
+		aAdd( aSelec, .t. )
+		
+		mnuModify( mnu, { { "chItems",      aItems },;
+						  { "chSelectable", aSelec },;
+						  { "mnCargo",      aCargo },;
+						  { "mnHeight",     nHeight },;
+					      { "mnWidth",      nWidth },; 
+						  { "chInitItem",   2 } } )
+		if !Empty( cMNUGoto )
+			nMNUGoto := hb_aScan( aCargo, { |x| x == cMNUGoto } )
+			if nMNUGoto == 0
+				?"ne namiram cMNUGoto =", cMNUGoto
+				wait
+				//DoLog( { "FILE" => "hzemq.log", "TYPE" => "CRITICAL", "BODY" => "rtchWly6Owa3bFlN2gUoFEmgnZnmf5dz Ne namiram cargo = '" + cMNUGoto + "'" } )
+			else
+				mnuModify( mnu, { { "mnSetInitItem", nMNUGoto } } )
+			endif
+			cMNUGoto := ""
+		endif	
+		
+		if m->npT1Column == nil .and. aT1Cols <> nil
+			m->npT1Column := mnuTableCheckBoundaries( aT1Cols, m->npT1Column )
+		endif
+		nAligned := mnuAlignSemicolon( mnu )
+		repeat
+			lRedraw := .t.
+			mnuLaunch( mnu )
+			
+			nKeyExt := mnuLastKey()
+			nKey    := hb_KeyStd( nKeyExt )
+
+			if mnuCancelled( mnu )
+				lExit := .t.
+			else
+				cCargo       := mnuGetCargo( mnu )
+				do case
+					case Left( cCargo, 3 ) == "#T1" .and. (nKeyExt == KX_NUM_LEFT .or. nKeyExt == KX_MID_LEFT)
+						m->npT1Column := mnuTableMove( aT1Cols, m->npT1Column, -1 )
+						lRedraw := .f.
+					
+					case Left( cCargo, 3 ) == "#T1" .and. (nKeyExt == KX_NUM_RIGHT .or. nKeyExt == KX_MID_RIGHT)
+						m->npT1Column := mnuTableMove( aT1Cols, m->npT1Column, +1 )
+						lRedraw := .f.
+					
+					case Left( cCargo, 3 ) == "#T2" .and. (nKeyExt == KX_NUM_LEFT .or. nKeyExt == KX_MID_LEFT)
+						if m->npT2Column > 1
+							m->npT2Column--
+						endif
+					
+					case Left( cCargo, 3 ) == "#T2" .and. (nKeyExt == KX_NUM_RIGHT .or. nKeyExt == KX_MID_RIGHT)
+						if m->npT2Column < 10
+							m->npT2Column++
+						endif
+					
+					case !Left( cCargo, 2 ) == "<>" .and. aScan( { KX_NUM_LEFT, KX_MID_LEFT, KX_NUM_RIGHT, KX_MID_RIGHT }, nKeyExt,,,.t. ) <> 0
+						//streklite rabotqt samo kadeto trqbwa
+
+					case  Left( cCargo, 2 ) == "<>" .and. ( nKeyExt == KX_ENTER .or. nKeyExt == KX_NUM_ENTER )
+						mnuInskey( KX_MID_DOWN )
+
+					case nKeyExt == KX_F10
+						lF10Pressed := .t.
+						if lValidated
+							
+						else
+							Color(, GROUP_RED )
+							MSGBox( { "Не е възможен запис заради отбелязаните грешки. Моля коригирайте." ,;
+									{ "msHDefaultESC", 0 },;
+									{ "msHItems", { "Натиснете ENTER" } } ,;
+									{ "msAllowESC", .t. } } )
+						endif
+						
+					case nKeyExt == KX_F1
+						lT1TopStatic := !lT1TopStatic
+						
+						if lT1TopStatic
+							mnuModify( mnu, { { "chTopStatic",        { "11111", "222222" } } } )
+						else
+							mnuModify( mnu, { { "chTopStatic",        nil } } )
+						endif
+
+				endcase
+			endif
+		until lRedraw .or. lExit
+	until lExit
+	mnuFinish( mnu )
+return nil
+//END HELPMNUCELLS ===================================================================================]]></content>
+	<tabTrigger>helpMNUCells</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>
+

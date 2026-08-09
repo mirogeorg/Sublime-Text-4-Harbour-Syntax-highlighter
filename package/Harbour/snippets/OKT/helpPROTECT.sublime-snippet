@@ -1,0 +1,71 @@
+<snippet>
+	<description>Protect/Undo при запис</description>
+	<content><![CDATA[// START HELPProtect =============================================
+		
+local oError
+local lSuccess
+local aErrMsg
+local lCancel
+local cLog
+local lSaved
+		
+lSuccess := .t.
+
+Protect_Begin()
+lCancel    := .f. //dali otkazvame zapisa poradi prowerki i dr. pri .t. vrashtame zapisanoto s UNDO
+aErrMSG    := {}
+BEGIN SEQUENCE with { |objErr| errStack( objErr ) }
+
+	//otvarqme failovete:
+	Protect_Ignore( cRZAQPLA )
+	Protect_Ignore( cRZAQPLAX1 )
+	Protect_Ignore( cRZAQPLAX2 )
+	
+	Protect_AddIndexes( cFILE_ZSOBZAQ, "DBFCDX" )
+	net use (cFILE_ZSOBZAQ) via "DBFCDX" exclusive new alias ZSOBZAQ
+	set order to tag ORD_ZSOBZAQ_ZAQWKANOM_EKATTE_IMOT_PORED
+	
+	close ZSOBZAQ
+
+	StatusLine( "Protect_Stop()" )
+	Protect_Stop( )
+	
+RECOVER USING oError
+
+END SEQUENCE
+
+if !Empty( aErrMSG )
+	lCancel := .t.
+endif
+
+IF oError <> nil
+	cLog := Protect_Undo()
+	DoLog( { "FILE" => "hStokovi.log",         "TYPE" => "INFO",     "BODY" => ProcName() + "(): Triene - neuspeh" + hb_eol() } )
+	DoLog( { "FILE" => "hStokovi_protect.log", "TYPE" => "CRITICAL", "BODY" => ProcName() + "(): Varnati promeni ot Protect_Undo()" + hb_eol() + cLog } )
+	Eval( ErrorBlock(), oError )
+	
+elseif lCancel == .f.
+	cLog := Protect_GetChangeLog()
+	DoLog( { "FILE" => "hStokovi.log",         "TYPE" => "INFO", "BODY" => ProcName() + "(): Triene" + hb_eol() } )
+	DoLog( { "FILE" => "hStokovi_protect.log", "TYPE" => "INFO", "BODY" => ProcName() + "(): Zapisani promeni" + hb_eol() + cLog } )
+	Protect_End()
+	if _HOME_
+		cOldScr := SaveScreenLegacy( 0, 0, MaxRow(), MaxCol() )
+		memoedit( cLog,,,,, .f. )  
+		Restore screen from cOldScr
+		hb_gtinfo( HB_GTI_CLIPBOARDDATA, cLog )
+	endif
+elseif lCancel == .t.
+	lSuccess := .f.
+	Protect_Undo()
+	DoLog( { "FILE" => "hStokovi.log",         "TYPE" => "INFO", "BODY" => ProcName() + "(): Triene, Otkazana operaciq" + hb_eol() } )
+	DispErrMsg( aErrMSG )
+endif
+
+if lSuccess
+	lSaved := .t. 
+endif
+//END HELPProtect ===================================================================================]]></content>
+	<tabTrigger>helpProtect</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

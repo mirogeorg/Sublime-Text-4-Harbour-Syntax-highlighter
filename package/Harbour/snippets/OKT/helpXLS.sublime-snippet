@@ -1,0 +1,100 @@
+<snippet>
+	<description>Печат към Excel</description>
+	<content><![CDATA[
+// START HELPXLS ================================================================================
+function xls()
+local cScriptName, cOut, nLines, lAbort
+
+	cScriptName := ENVLocal() + "XLSPrint\script.txt"
+	lAbort := .f.
+	while HB_VFEXISTS( cScriptName ) .and. HB_VFERASE( cScriptName ) <> 0 
+		Color(, GROUP_GREEN )
+		if msgBox( { { "WinTitle", "Внимание" },;
+					"Заключен файл: " + cScriptName + " Error:" + Str_( fError() ),;
+					"Затворете Excel и опитайте пак.",;
+					"-",;
+					{ "msHDefaultESC", 2 },;
+					{ "msAllowESC", .t. },;
+					{ "msHItems", { "Нов опит", "Изход" } };
+				} ) == 2
+			lAbort := .t.
+			exit
+		endif
+		
+	enddo
+	if !lAbort
+
+		cOut := ""
+		cOut += "REQUIRE 2010" + CRLF
+		cOut += "output DirektniDostavki" + CRLF
+		cOut += "template_XLSX templ_DwijenieVarnaMPS.xlsx" + CRLF
+		cOut += "DO_NOT_HIDE_HORIZONTAL_CELLS" + CRLF
+		cOut += "DO_NOT_SKIP_HORIZONTAL_CELLS" + CRLF
+		cOut += "set_template_sheet MPS" + CRLF                                      //slaga se samo ako sheeta e <> ot Template
+		
+		while .t.
+		
+			cOut += "new_sheet " + DOS_1251( Str2Sheet( allTrim( cKola ) ) ) + CRLF      //slaga se samo ako ima > 1 sheet
+			mnuh := { => }
+			mnuh[ "data"  ] := DtoC( hRec[ "DAT" ] )
+			mnuh[ "nomer" ] := StrZ( hRec[ "NOMER" ], 7)
+			cOut += "data ant_1 " + Hash2Str( mnuh )         + CRLF
+			cOut += "newline"                             + CRLF
+			
+			//pechat...
+			if Len( cOut ) > 65535 
+				if Len( cOut ) = strFile( cOut, ENVLocal() + "XLSPrint\script.txt", .t.)
+				cOut := ""
+				else
+					SimulateError( "Error writing file" )
+				endif
+			endif
+		enddo
+					
+		cOut += "AUTO_FIT_WIDTH" + CRLF
+		
+		cOut += "GOTO B3"               + CRLF
+		cOut += "SELECT_CURRENT_ROW"    + CRLF
+		cOut += "AUTOFILTER"            + CRLF
+		
+		//cOut += "GOTO_BEGIN" + CRLF
+		cOut += "SET_PAGE_ZOOM 65" + CRLF
+		
+		cOut += "GOTO A4" + CRLF
+		cOut += "FREEZE_PANES" + CRLF
+		
+		cOut += "XLSX_Copy_Print_Setup_From_Sheet Neojanati" + CRLF                   //trqbwa da e POSLEDEN RED za sheeta, inache pechata se razmestva.
+		
+		if Len( cOut ) = strFile( cOut, ENVLocal() + "XLSPrint\script.txt", .t.)
+			cOut := ""
+		else
+			SimulateError( "Error writing file" )
+		endif
+
+		if nLines > 0
+			color(, GROUP_RED )
+			while FileLocked( "XLSPRINT\SCRIPT\SCRIPT.XLS" )
+				if MSGBox( { "Моля затворете Excel с име script.xls" ,;
+						{ "msHDefaultESC", 2 },;
+						{ "msHItems", { "Готово", "Изход" } } ,;
+						{ "msAllowESC", .t. } } ) = 2
+					exit
+				endif
+			enddo 
+				
+			if !FileLocked( "XLSPRINT\SCRIPT\SCRIPT.XLS" )
+				RunXLS()
+			endif
+		else
+			MSGBox( { "Няма данни за посочените условия" ,;
+					{ "msHDefaultESC", 0 },;
+					{ "msHItems", { "Натиснете ENTER" } } ,;
+					{ "msAllowESC", .t. } } )
+			
+		endif
+	endif
+return nil
+//END HELPXLS ===================================================================================]]></content>
+	<tabTrigger>helpXLS</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

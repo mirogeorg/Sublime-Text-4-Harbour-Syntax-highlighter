@@ -1,0 +1,238 @@
+<snippet>
+	<description>MNU със checkbox</description>
+	<content><![CDATA[// START HELPMNU =============================================
+function sprX()
+#include "HBHASH.ch"
+#define cMEMDW "~rbPNxwvWlRuvh8LbwVzkGgTVS01Nn0F5.bin"
+local aItems, aSelec, aCargo, aMarks	
+local cCargo
+local cMNUGoto    := ""
+local nMNUGoto
+local GetList     := {}	
+local hData, s, a, c
+local lF10Pressed := .f.
+local lRefresh
+local lValidated
+local mnu
+local nAligned
+local nKeyExt
+local nKey
+local nWidth, nHeight
+local _last, hRec
+	SaveColor00()
+	SaveColor()
+	color( COLOR_NORMAL, GROUP_BLUE )
+	mnu := mnuInit()
+	mnuModify( mnu, { ;
+						{ "WinStatus",          {{ "F10", "Към обработка" }, { "ESC", "Изход" }} },;
+						{ "WinTitle",           "Движение на МПС - Варна" },;
+						{ "chCustomSelector",   { |x, nLine| if( Left( aCargo[ nLine ], 2 ) == "<>", x, Remove3( x ) ) } },;
+						{ "chExtendedExitKeys", { KX_F10, KX_NUM_LEFT, KX_MID_LEFT, KX_NUM_RIGHT, KX_MID_RIGHT } },;
+						{ "chExtendedSearch",   .F. },;
+						{ "chSolidSelect",      .t. },;
+						{ "chSearch",           .F. },;
+						{ "chUnknownExit",      .t. },;
+						{ "mnCenteredItems",    .f. } } )
+						// { "chSolidSelect",    { |x| x != KX_TAB } },;
+						// { "WinY1",           1 },;
+						//{ "mnBorder",         0 },;
+						// { "WinX1",           3 },;
+						// { "WinXOffset",      -20 },;
+						// { "WinYOffset",      -5 },;
+						// { "mnBorder",        0 },; //bez border, platno do raba na ekrana
+						// { "chRedefineLEFT",   { |x| x == KX_CTRL_MID_LEFT  .or. x == KX_CTRL_NUM_LEFT } },;
+						// { "chRedefineRIGHT",  { |x| x == KX_CTRL_MID_RIGHT .or. x == KX_CTRL_NUM_RIGHT } },;
+						// { "chHorizStep",     5 },;
+
+	hData := hb_Deserialize( hb_MemoRead( cMEMDW ) )
+	if !hb_isHash( hData )
+		hData := { => }
+	endif
+	hb_hAutoAdd( hData, HB_HAUTOADD_ALWAYS )
+	default hData[ "cFIRMA"   ] to ""
+	default hData[ "cNOMERF"  ] to ""
+	default hData[ "dNDA"     ] to BOM( Date() )
+	default hData[ "dKDA"     ] to EOM( Date() )
+	default hData[ "nSprType" ] to SPR_WMPS
+	hb_hAutoAdd( hData, HB_HAUTOADD_NEVER )
+	
+	lRefresh := .t.
+
+	Color00( 6, 12 )
+	Color00( 7, 14 )
+	
+	//pri sin
+	//Color00( 8,  0 )
+	//Color00( 9, 14, 9 ) //лента за избор със стрелки
+	
+	//pri cherven
+	Color00( 8, 12 )
+	Color00( 9,  4, 12 ) //лента за избор със стрелки
+	
+	//pri rozov prozorec
+	Color00( 8,  0 )
+	Color00( 9, 14, 13 ) //лента за избор със стрелки
+	repeat
+		//za po-barzo reshenie - func ZaqList() - prezarejda samo kogato e nujno chrez lReload, oswen tova markira mnojestvo chrez hash, koeto e po-barzo
+		aItems := {}
+		aSelec := {}
+		aCargo := {}
+		aMarks := {}
+
+		lValidated := .t.
+
+		c := ""
+		if Empty( hRec[ "KATEGORIQ" ] )
+			if lF10Pressed
+				c := "°6(въведете задължително)°6"
+			endif
+			lValidated := .f.
+		else
+			c := "°1" + Str_( hRec[ "KATEGORIQ" ] ) + "°1"
+		endif
+		aAdd( aItems, "Категория:: " + c )
+		aAdd( aCargo, "KATEGORIQ" )
+		aAdd( aSelec, .T. )
+	
+		
+		aAdd( aItems, "Период:: °7" + DtoC( hData[ "dNDA" ] ) + " - " + DtoC( hData[ "dKDA" ] ) + "°7")
+		aAdd( aCargo, "PERIOD" )
+		aAdd( aSelec, .T. )
+		
+		aVIDChoices := { SPR_WMPS, SPR_SUMARNA, SPR_CHAST }
+		c := Izbor2Str( { " Движение по МПС ", " Сумарна рекапитулация за МПС ", " Частично разтоварени МПС " }, aVIDChoices, hData[ "nSprType" ], "°8", "°9" )
+		aAdd( aItems, "Вид на справката:: " + c )
+		aAdd( aCargo,  "<>VID" )
+		aAdd( aSelec, .T. )
+		
+		nWidth  := Min( MaxCol() + 1, 95 )
+		nHeight := Min( MaxRow() + 1, Len( aItems ) + 2 )  
+		mnuModify( mnu, { { "chItems",      aItems },;
+						  { "chSelectable", aSelec },;
+						  { "mnCargo",      aCargo },;
+						  { "mnHeight",     nHeight },;
+					      { "mnWidth",      nWidth },; 
+						  { "chInitItem",   2 } } )
+		if !Empty( cMNUGoto )
+			nMNUGoto := hb_aScan( aCargo, { |x| x == cMNUGoto } )
+			if nMNUGoto == 0
+				?"ne namiram cMNUGoto =", cMNUGoto
+				wait
+				//DoLog( { "FILE" => "hzemq.log", "TYPE" => "CRITICAL", "BODY" => "rtchWly6Owa3bFlN2gUoFEmgnZnmf5dz Ne namiram cargo = '" + cMNUGoto + "'" } )
+			else
+				mnuModify( mnu, { { "mnSetInitItem", nMNUGoto } } )
+			endif
+			cMNUGoto := ""
+		endif	
+		
+		nAligned := mnuAlignSemicolon( mnu )
+		mnuLaunch( mnu )
+		
+		nKeyExt := mnuLastKey()
+		nItem   := mnuGetItemNum()
+
+		if mnuCancelled( mnu )
+			exit
+		else
+			cCargo       := mnuGetCargo( mnu )
+			do case
+				case !Left( cCargo, 2 ) == "<>" .and. aScan( { KX_NUM_LEFT, KX_MID_LEFT, KX_NUM_RIGHT, KX_MID_RIGHT }, nKeyExt,,,.t. ) <> 0
+					//streklite rabotqt samo kadeto trqbwa
+
+				case  Left( cCargo, 2 ) == "<>" .and. ( nKeyExt == KX_ENTER .or. nKeyExt == KX_NUM_ENTER )
+					mnuInskey( KX_MID_DOWN )
+
+				case nKeyExt == KX_F10
+					lF10Pressed := .t.
+					if lValidated
+						
+						// select RZEMIMOT
+						// if lNew
+						//	
+						// else
+						// dbGoTo( nRec )
+						// endif
+						// Hash2Rec( hRec )
+						
+						exit
+					else
+						Color(, GROUP_RED )
+						MSGBox( { "Не е възможен запис заради отбелязаните грешки. Моля коригирайте." ,;
+								{ "msHDefaultESC", 0 },;
+								{ "msHItems", { "Натиснете ENTER" } } ,;
+								{ "msAllowESC", .t. } } )
+					endif
+
+				case cCargo == "FIRMA" .and. ( nKeyExt == KX_ENTER .or. nKeyExt == KX_NUM_ENTER )
+					
+					GET FIRMA to S init "" MAIN { 4,22 ,GROUP_RED }
+
+					if !ISNIL( s )   /// ако не сме натиснали ESC
+						hData[ "cNOMERF" ] := s[ LOADFIR_NOMER ]
+						hData[ "cFIRMA"  ] := s[ LOADFIR_FIRMA ]
+						mnuInsKey( KX_MID_DOWN )
+					endif
+				
+				case cCargo == "PERIOD" .and. ( nKeyExt == KX_ENTER .or. nKeyExt == KX_NUM_ENTER )
+				
+					color( COLOR_NORMAL, GROUP_RED )
+					a := PERIOD1( "~3132300.bin" )
+					if !ISNIL( a )
+						hData[ "dNDA" ] := a[ 1 ]
+						hData[ "dKDA" ] := a[ 2 ]
+						mnuInsKey( KX_MID_DOWN )
+					endif
+				
+				case cCargo == "PERIOD" .and. ( nKeyExt == KX_ENTER .or. nKeyExt == KX_NUM_ENTER )
+
+					color( COLOR_NORMAL, GROUP_RED )
+					a := Period2Time( "zefau6vdMwaceWdYoDJXsqwC98889H4z.tmp" )
+					if !ISNIL( a )
+						dNDA := PRMSGet( a, "P2_NDA" )
+						nNVR := PRMSGet( a, "P2_NVR" )
+
+						dKDA := PRMSGet( a, "P2_KDA" )
+						nKVR := PRMSGet( a, "P2_KVR" )
+
+						mnuInsKey( KX_MID_DOWN )
+					endi
+					
+				case cCargo == "REKOLTA" .and. ( nKeyExt == KX_ENTER .or. nKeyExt == KX_NUM_ENTER )
+					Color(, GROUP_RED)
+					a := Rekizbor( 1, hData[ "nRekolta" ] )
+					if !ISNIL( a )
+						hData[ "nRekolta" ] := a[ REKIZBOR_GODINA ]
+						mnuInsKey( KX_MID_DOWN )
+					endif
+					
+				case cCargo == "DAT" .and. (nKeyExt == KX_ENTER .or. nKeyExt == KX_NUM_ENTER)
+					color( ,GROUP_RED )
+					_last := msgBox( { "Дата: ÷" + Space( 9 ) } )
+					
+					@ @@1 get hRec[ "DAT" ] 
+					READ
+					if !LastKey() == K_ESC
+						mnuInsKey( KX_MID_DOWN )
+					endif
+					winClose()
+
+				case cCargo == "<>VID" .and. ( nKeyExt == KX_NUM_LEFT .or. nKeyExt == KX_MID_LEFT )
+					hData[ "nSprType" ] := mnuTableCheckBoundaries( aVIDChoices, hData[ "nSprType" ] )
+					hData[ "nSprType" ] := mnuTableMove( aVIDChoices, hData[ "nSprType" ], -1 )
+						
+				case cCargo == "<>VID" .and. ( nKeyExt == KX_NUM_RIGHT .or. nKeyExt == KX_MID_RIGHT ) 
+					hData[ "nSprType" ] := mnuTableCheckBoundaries( aVIDChoices, hData[ "nSprType" ] )
+					hData[ "nSprType" ] := mnuTableMove( aVIDChoices, hData[ "nSprType" ], +1 )
+					
+			endcase
+		endif
+	until .f.
+	hb_memoWrit( cMEMDW, hb_Serialize( hData, HB_SERIALIZE_COMPRESS ) )
+	mnuFinish( mnu )
+	RestColor()
+	RestColor00()
+return nil
+//END HELPMNU ===================================================================================]]></content>
+	<tabTrigger>helpMNUCheckbox</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

@@ -1,0 +1,9 @@
+<snippet>
+  <content><![CDATA[FOR ${1:n} := ${2:1} TO ${3:Len( aItems )}
+	${0}
+NEXT]]></content>
+  <tabTrigger>for</tabTrigger>
+  <scope>source.harbour</scope>
+  <description>Harbour FOR/NEXT loop</description>
+</snippet>
+

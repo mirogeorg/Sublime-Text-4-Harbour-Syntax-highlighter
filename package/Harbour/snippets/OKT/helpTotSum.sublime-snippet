@@ -1,0 +1,65 @@
+<snippet>
+	<description>Сумиране чрез TotSum</description>
+	<content><![CDATA[
+// START HELPTOTSUM ================================================================================
+t    := totSumInit()
+totSumReset( t, "p_kolbn",    "ZA TOTAL")
+while !EOF()
+	totSumReset( t, "p_kolbn",    "ZA EKATTE")
+	while EKATTE..
+		...
+		totSumAdd( t, "p_kolbn", 8.20 )
+	enddo
+	?totSumGet( t, "p_kolbn", "ZA EKATTE" )
+enddo
+totSumGet( t, "p_kolbn", "ZA TOTAL" )
+
+
+
+DO WHILE !EOF()
+   cCurOblast := FIELD->OBLAST
+   
+   // Reset OBLAST totals (ensure 0 start)
+   totSumGetAndReset( hTot, "DEBIT", "ZA OBLAST" ) //"ZA OBLAST" can be numeric level 1, 2, 3...
+   totSumGetAndReset( hTot, "KREDIT", "ZA OBLAST" ) 
+   
+   DO WHILE cCurOblast == FIELD->OBLAST .AND. !EOF()
+      cCurObstina := FIELD->OBSTINA
+      
+      // Reset OBSTINA totals
+      totSumGetAndReset( hTot, "DEBIT", "ZA OBSTINA" )
+      totSumGetAndReset( hTot, "KREDIT", "ZA OBSTINA" )
+
+      DO WHILE cCurObstina == FIELD->OBSTINA .AND. !EOF()
+         cCurEkatte := FIELD->EKATTE
+         
+         // Reset EKATTE totals
+         totSumGetAndReset( hTot, "DEBIT", "ZA EKATTE" )
+         totSumGetAndReset( hTot, "KREDIT", "ZA EKATTE" )
+
+         DO WHILE cCurEkatte == FIELD->EKATTE .AND. !EOF()
+            
+            // --- CORE LOGIC ---
+            // Add to "DEBIT". Because we "touched" OBLAST, OBSTINA, 
+            // and EKATTE above, this adds to ALL 3 buckets at once.
+            totSumAdd( hTot, "DEBIT",  FIELD->SSD )
+            totSumAdd( hTot, "KREDIT", FIELD->SSK )
+            
+            SKIP
+         ENDDO
+         
+         // Footer: EKATTE
+         ? "Total " + cCurEkatte, totSumGetAndReset( hTot, "DEBIT", "ZA EKATTE" ), totSumGetAndReset( hTot, "KREDIT", "ZA EKATTE" )
+      ENDDO
+      
+      // Footer: OBSTINA
+      ? "Total " + cCurObstina, totSumGetAndReset( hTot, "DEBIT", "ZA OBSTINA" ), totSumGetAndReset( hTot, "KREDIT", "ZA OBSTINA" )
+   ENDDO
+   
+   // Footer: OBLAST
+   ? "Total " + cCurOblast, totSumGetAndReset( hTot, "DEBIT", "ZA OBLAST" ), totSumGetAndReset( hTot, "KREDIT", "ZA OBLAST" )
+ENDDO
+//END HELPXLS ===================================================================================]]></content>
+	<tabTrigger>helpTotSum</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

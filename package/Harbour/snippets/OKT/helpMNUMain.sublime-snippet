@@ -1,0 +1,93 @@
+<snippet>
+	<description>Главно меню със запомняне</description>
+	<content><![CDATA[// START HELPMNUMain --- SAMO ZA GLAVNO MENU, nqma lVALIDATED!!!! =============================================
+#define MAINM_MEM   "~nfv2Z01FXGsnCnYvbBIALL3DHwzufeBQ.BIN"
+local h
+local cCargo
+local aItems 
+local aSelec 
+local aCargo 
+local mnu
+local lExit
+
+	color( COLOR_NORMAL, GROUP_BLUE )
+	mnu := mnuInit()
+	mnuModify( mnu, { ;
+						{ "WinStatus",        {{ "ESC", "Изход" }} },;
+						{ "WinTitle",         "Справки Вардим" },;
+						{ "chCustomSelector", { |x, nLine| hb_LeftEq( aCargo[ nLine ], "<>" ), x, Remove3( x ) } },;
+						{ "chExtendedSearch", .F. },;
+						{ "chSolidSelect",    .f. },;
+						{ "mnHeight",         6 },;
+						{ "mnWidth",          25 },;
+						{ "mnCenteredItems",  .t. } } )
+						// { "WinY1", 1 },;
+						// { "WinX1", 3 },;
+						// { "chHorizStep", 5 },;
+
+	h := hb_deserialize( fileStr( MAINM_MEM ) )
+	if !hb_isHash( h )
+		h := { => }
+	endif
+	hb_hAutoAdd( h, HB_HAUTOADD_ALWAYS )
+	default h[ "nLast"    ] to 2
+	hb_hAutoAdd( h, HB_HAUTOADD_NEVER )
+
+	repeat
+		aItems := {}
+		aSelec := {}
+		aCargo := {}
+		
+		aAdd( aItems, "" )
+		aAdd( aCargo, "" )
+		aAdd( aSelec, .f. )
+
+		aAdd( aItems, "Справка ожънати" )
+		aAdd( aCargo, "sprVardim" )
+		aAdd( aSelec, .T. )
+		
+		aAdd( aItems, "Справка неожънати" )
+		aAdd( aCargo, "sprNeojVardim" )
+		aAdd( aSelec, .T. )
+		
+		aAdd( aItems, "" )
+		aAdd( aCargo, "" )
+		aAdd( aSelec, .f. )
+		
+		mnuModify( mnu, { { "chItems",      aItems },;
+						  { "chSelectable", aSelec },;
+						  { "mnCargo",      aCargo },;
+						  { "chInitItem",   h[ "nLast"    ] } } )
+		mnuAlignSemicolon( mnu )
+		mnuLaunch( mnu )
+
+		if mnuCancelled( mnu )
+			exit
+		else
+			h[ "nLast"    ] := mnuGetItemNum( mnu )
+			strFile( hb_serialize( h ), MAINM_MEM )
+			cCargo := mnuGetCargo( mnu )
+			do case
+				case Left( cCargo, 2 ) == "<>" .and. ( LastKey() = K_LEFT .or. LastKey() = K_RIGHT )
+					//streklite rabotqt samo kadeto trqbwa
+
+				case Left( cCargo, 2 ) == "<>" .and. LastKey() = K_ENTER
+					//ENTER raboti samo na obiknowenite ITEMi
+
+				case cCargo == "sprVardim"
+					
+					sprVardim()
+				
+				case cCargo == "sprNeojVardim"
+				
+					sprNeojVardim()
+
+			endcase
+		endif
+	until .f.
+	lExit := mnuCancelled( mnu )
+	mnuFinish( mnu )
+//END HELPMNU ===================================================================================]]></content>
+	<tabTrigger>helpMNUMain</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>

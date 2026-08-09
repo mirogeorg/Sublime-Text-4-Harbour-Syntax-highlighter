@@ -1,0 +1,14 @@
+<snippet>
+  <content><![CDATA[CLASS ${1:Name}
+	DATA ${2:Value}
+	METHOD ${3:New}( ${4:arguments} )
+ENDCLASS
+
+METHOD ${3:New}( ${4:arguments} ) CLASS ${1:Name}
+	${0}
+RETURN Self]]></content>
+  <tabTrigger>class</tabTrigger>
+  <scope>source.harbour</scope>
+  <description>Harbour class</description>
+</snippet>
+

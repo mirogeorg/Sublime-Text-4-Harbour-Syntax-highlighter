@@ -1,0 +1,151 @@
+<snippet>
+	<description>Dialog s checkboxes</description>
+	<content><![CDATA[// START HELPMNU =============================================
+function db3Checkboxes( hRecnos ) //za MNU s checkboxes see helpMNUCheckBox and StokoviRazpiski()
+local aKeys
+local nYear, nYearTo, nYearFrom, nSTOPGOD, cYear, nSROKDOG
+local nLine
+local nKeyExt
+local l, lMarked
+local nWidth
+local mnu
+local n, i
+local ret
+local aItems := {}
+local aCargo := {}
+local aSelec := {} // is selectable
+local aCheck := {} // dali tozi red da e s checkboxove
+local aMarks := {} // tuk otiva markirovkata
+local cTitle
+local cBody
+local lCenterVertically
+local lMultiSelect
+local aFieldsRENDKA
+local cargo
+local x, aRecs
+
+static nLastLine
+
+
+field SASOBID
+	
+	if !Empty( hRecnos )
+		
+		SaveColor00()
+		
+		Color00( 2, 15 )
+		Color00( 5, 14 )
+		Color00( 6, 15, 12 )
+		Color00( 7, 12 )
+		Color00( 9, 7 )
+		
+		nWidth := 80
+		
+		for each x in hRecNos
+			aAdd( aItems, x:__enumValue() )
+			aAdd( aCargo, x:__enumKey() )
+			aAdd( aSelec, .t.)
+			aAdd( aCheck, .t.)
+		next
+		
+		
+		Color00( 5, 12 )
+		Color00( 4, 10 )
+
+		aMarks := aFill( Array( Len( aItems ) ), .f. )
+
+		//------------ mnuMinimal BEGIN ---------------------------------------------------------
+		Color(, GROUP_RED )
+		mnu := mnuInit()
+		
+		mnuModify( mnu, { ;
+					{ "chCustomSelector",      { |x, nLine|
+															if aCheck[ nLine ] 
+																return if( aMarks[ nLine ], " √ " + x + " ", "   " + x + " " ) 
+															else
+																return x
+															endif
+															return nil
+												} },;
+					 { "chCustomOutput",        { |x, nLine| 
+															if aCheck[ nLine ] 
+																return if( aMarks[ nLine ], "°4 √°4 " + x + " ", "   " + x + " " ) 
+															else
+																return x
+															endif
+															return nil
+															// 
+												} } } )
+		aTopStatic := { "      Фактура      Дата             Сума  Реколта Папка  Номер",;
+						"──────────────┬────────────┬─────────────┬───────┬─────┬──────" }
+		
+		mnuModify( mnu, { ;
+						 { "chTopStatic",        aTopStatic },;
+						 { "winTitle",         "Намерени са фактури по сметка 404. Изберете кои ще изтриете" },;
+						 { "chExtendedSearch",   .t. },;
+						 { "chSearch",           .t. },;
+						 { "chHorizStep",        5 },;
+						 { "chExtendedExitKeys", { KX_F10, KX_SPACE } },;
+						 { "chInitItem",         nLastLine },;
+						 { "mnCenteredItems",    .f. };
+						} )
+						 // { "chUnknownExit",      .t. },;
+		
+		
+		mnuModify( mnu, { { "chItems",      aItems },;
+						  { "chSelectable", aSelec },;
+						  { "mnCargo",      aCargo },;
+						  { "mnHeight",     Min( Len( aItems ) + Len( aTopStatic ) + 3, MaxRow() + 1 ) },;
+						  { "mnWidth",      Min( nWidth, MaxCol() + 1 ) };
+						} ) 
+		
+		// if !lCenterVertically
+			mnuModify( mnu, { { "WinY2", MaxRow() - 1 } } )
+		// endif
+		repeat
+		
+			//proverka imame li markirani
+			lMarked := .f.
+			for each l in aMarks
+				if l
+					lMarked := .t.
+					exit
+				endif
+			next
+			mnuModify( mnu, { { "WinStatus",          {{ "Space/ENTER", "Маркира" }, { "F10", "Трие маркираните" }, { "ESC", "Продължение без триене" } } } } )
+			mnuLaunch( mnu )
+			
+			if mnuCancelled( mnu )
+				exit
+			else
+
+				nKeyExt := mnuLastKey()
+				nLine   := mnuGetItemNum( mnu )
+				cargo := mnuGetCargo( mnu )
+				
+				do case
+					case nKeyExt == KX_SPACE .or. nKeyExt == KX_ENTER .or. nKeyExt == KX_NUM_SPACE
+						aMarks[ nLine ] := !aMarks[ nLine ]
+						mnuInskey( KX_MID_DOWN )
+						
+					case nKeyExt == KX_F10 .and. lMarked
+						ret := { => }
+						for i := 1 to Len( aMarks )
+							if aMarks[ i ]
+								ret[ aCargo[ i ] ] := nil
+							endif
+						next
+						exit
+						
+				endcase
+			endif
+		until .f.
+		mnuFinish( mnu )
+		
+		RestColor00()
+	endif
+return ret
+//END HELPMNU ===================================================================================]]></content>
+	<tabTrigger>helpDB3Checkbox</tabTrigger>
+	<scope>source.harbour</scope>
+</snippet>
