@@ -1,0 +1,858 @@
+[
+  {
+    "name": "__HBEXTERN__GTALLEG__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__GTQTC__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__GTWVG__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__GTWVW__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HARBOUR__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBAMF__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBBLAT__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBBLINK__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBBMP__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBBZ2__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBBZ2IO__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBCAIRO__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBCOMIO__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBCOMM__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBCPAGE__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBCT__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBCUPS__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBCURL__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBEXPAT__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBFBIRD__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBFIMAGE__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBFORMAT__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBFOXPRO__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBFSHIP__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBGD__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBGS__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBGT__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBGZIO__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBHPDF__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBHTTPD__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBLANG__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBLZF__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBMAGIC__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBMEMIO__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBMISC__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBMLZO__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBMXML__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBMYSQL__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBMZIP__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBNETIO__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBNF__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBODBC__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBOSLIB__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBPGSQL__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBPIPEIO__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBSCALAR__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBSMS__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBSQLIT3__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBSSL__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBTCPIO__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBTEST__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBTINYMT__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBTIP__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBTPATHY__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBUNIX__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBUSRRDD__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBWIN__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBXDIFF__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBXPP__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBZEBRA__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__HBZIPARC__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__RDDADS__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__RDDBM__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__SDDFB__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__SDDMY__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__SDDOCI__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__SDDODBC__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__SDDPG__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__SDDSQLT3__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "__HBEXTERN__XHB__",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_BG866",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_BGISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_BGMIK",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_BGWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_CS852",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_CS852C",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_CSISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_CSKAMC",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_CSWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_DE850",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_DE850M",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_DE858",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_DEISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_DEWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_DK865",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_EE775",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_EEWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_EL437",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_EL737",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ELISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ELWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_EN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ES850",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ES850C",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ES850M",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ESISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ESMWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ESWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_FI850",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_FR850",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_FR850C",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_FR850M",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_FRISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_FRWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_HE862",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_HEWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_HR646",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_HR852",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_HRISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_HRWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_HU852",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_HU852C",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_HUISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_HUWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_IS850",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_IS861",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_IT437",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_IT850",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_IT850M",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ITISB",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ITISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ITWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_LT775",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_LTWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_LV775",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_LVWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_NL850",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_NL850M",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_NO865",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_PL852",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_PLISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_PLMAZ",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_PLWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_PT850",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_PT860",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_PTISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_RO852",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ROISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_ROWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_RU1251",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_RU866",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_RUISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_RUKOI8",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SK852",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SK852C",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SKISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SKKAMC",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SKWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SL646",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SL852",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SLISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SLWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SR646",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SR646C",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SRWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SV437C",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SV850",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SV850M",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SVISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_SVWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_TR857",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_TRISO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_TRWIN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_UA1125",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_UA1251",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_UA866",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_UAKOI8",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_UTF16LE",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_UTF8",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_CODEPAGE_UTF8EX",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_GT_ALLEG",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_GT_QTC",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_GT_WGU",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_GT_WVG",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_GT_WVW",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_BE",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_BG",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_CA",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_CS",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_DE",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_DE_AT",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_EE",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_EL",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_EN",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_EO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_ES",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_ES_419",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_EU",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_FR",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_GL",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_HE",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_HR",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_HU",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_ID",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_IS",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_IT",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_KO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_LT",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_LV",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_NL",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_PL",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_PT",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_PT_BR",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_RO",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_RU",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_SK",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_SL",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_SR_CYR",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_SR_LAT",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_SV",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_TR",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_UK",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_ZH",
+    "reason": "No direct source or documentation evidence found."
+  },
+  {
+    "name": "HB_LANG_ZH_SIM",
+    "reason": "No direct source or documentation evidence found."
+  }
+]
