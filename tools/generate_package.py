@@ -78,29 +78,29 @@ contexts:
 
   comments:
     - match: '^\\s*\\*(?![=*])'
-      scope: punctuation.definition.comment.asterisk.harbour
+      scope: punctuation.definition.comment.harbour
       push:
         - meta_scope: comment.line.asterisk.harbour
         - match: '$'
           pop: true
     - match: '&&'
-      scope: punctuation.definition.comment.double-ampersand.harbour
+      scope: punctuation.definition.comment.harbour
       push:
         - meta_scope: comment.line.double-ampersand.harbour
         - match: '$'
           pop: true
     - match: '//'
-      scope: punctuation.definition.comment.double-slash.harbour
+      scope: punctuation.definition.comment.harbour
       push:
         - meta_scope: comment.line.double-slash.harbour
         - match: '$'
           pop: true
     - match: '/\\*'
-      scope: punctuation.definition.comment.block.begin.harbour
+      scope: punctuation.definition.comment.begin.harbour
       push:
         - meta_scope: comment.block.harbour
         - match: '\\*/'
-          scope: punctuation.definition.comment.block.end.harbour
+          scope: punctuation.definition.comment.end.harbour
           pop: true
 
   preprocessor:

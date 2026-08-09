@@ -16,7 +16,6 @@ harbour_Sublime_Text_4_Harbour_Syntax_highlighter/
 ├── PLAN.md, README.md, LICENSE, THIRD_PARTY_NOTICES.md
 ├── package/Harbour/          # единствената инсталируема ST4 папка
 │   ├── Harbour.sublime-syntax
-│   ├── Harbour Comments.sublime-color-scheme
 │   ├── completions/
 │   ├── snippets/
 │   ├── data/function_help.json
@@ -28,8 +27,7 @@ harbour_Sublime_Text_4_Harbour_Syntax_highlighter/
 └── local-only/               # ignored local snapshots, caches and releases
 ```
 
-- Главният синтаксис е native `.sublime-syntax`, `version: 2`, със scope `source.harbour` и отделни comment scopes за четирите Harbour форми.
-- Опционалната `Harbour Comments.sublime-color-scheme` дава различни цветове на формите `*`, `&&`, `//` и `/* ... */`, без автоматично да променя схемата на потребителя.
+- Главният синтаксис е native `.sublime-syntax`, `version: 2`, със scope `source.harbour`.
 - Автоматично разпознаваеми разширения: `.prg`, `.hb`, `.ch`, `.ppo`, `.res`, `.idu`. `.c` и `.h` не се присвояват.
 - Добавят се две команди: `Harbour: Function Help` и `Harbour: Help for Symbol Under Cursor`.
 - Completion записите използват rich completion полетата `trigger`, snippet `contents`, `kind`, `annotation` и `details`.

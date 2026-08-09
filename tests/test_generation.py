@@ -67,41 +67,6 @@ class GeneratedPackageTests(unittest.TestCase):
         for extension in ("prg", "hb", "ch", "ppo", "res", "idu"):
             self.assertIn(f"  - {extension}\n", header)
 
-    def test_comment_forms_have_distinct_scopes_and_optional_colors(self):
-        syntax = (ROOT / "package" / "Harbour" / "Harbour.sublime-syntax").read_text(
-            encoding="utf-8"
-        )
-        for scope in (
-            "comment.line.asterisk.harbour",
-            "comment.line.double-ampersand.harbour",
-            "comment.line.double-slash.harbour",
-            "comment.block.harbour",
-            "punctuation.definition.comment.asterisk.harbour",
-            "punctuation.definition.comment.double-ampersand.harbour",
-            "punctuation.definition.comment.double-slash.harbour",
-            "punctuation.definition.comment.block.begin.harbour",
-            "punctuation.definition.comment.block.end.harbour",
-        ):
-            self.assertIn(scope, syntax)
-
-        scheme = json.loads(
-            (
-                ROOT
-                / "package"
-                / "Harbour"
-                / "Harbour Comments.sublime-color-scheme"
-            ).read_text(encoding="utf-8")
-        )
-        rules = {rule["scope"]: rule for rule in scheme["rules"]}
-        for scope in (
-            "comment.line.asterisk.harbour",
-            "comment.line.double-ampersand.harbour",
-            "comment.line.double-slash.harbour",
-            "comment.block.harbour",
-        ):
-            self.assertIn(scope, rules)
-            self.assertRegex(rules[scope]["foreground"], r"^#[0-9A-Fa-f]{6}$")
-
     def test_generated_completions_replace_buffer_word_duplicates(self):
         completion_file = json.loads(
             (

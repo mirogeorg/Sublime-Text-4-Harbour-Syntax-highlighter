@@ -5,7 +5,7 @@
 
 | Файл | Действие | Очакван scope/цвят | Признак за дефект |
 |---|---|---|---|
-| `syntax_test_comments.prg` | Провери трите line comment форми и block comment | `comment.*.harbour`; при избрана `Harbour Comments` схема — четири различни цвята | Текст след comment се оцветява като код или формите изглеждат еднакви при избрана схема |
+| `syntax_test_comments.prg` | Провери трите line comment форми и block comment | `comment.*.harbour` | Текст след comment се оцветява като код |
 | `syntax_test_strings.prg` | Провери `'`, `"`, `e"` и bracket string | `string.quoted.*.harbour` | String приключва твърде рано или поглъща следващия ред |
 | `syntax_test_literals_operators.prg` | Постави курсора върху date, `.T.`, `:=`, `**=` и `->` | `constant.*` и `keyword.operator.harbour` | Операторът се дели или остава plain text |
 | `syntax_test_declarations_oo.prg` | Отвори Symbol List / Goto Symbol | function/class имената са symbols | Липсват symbols или keyword е име |
